@@ -37,8 +37,9 @@ public class SaveActivity extends AppCompatActivity {
         if (extras != null){
             item = extras.getParcelable(MainActivity.TRANSACTION_KEY);
             index = extras.getInt(MainActivity.INDEX_KEY, 0);
-            descriptionInput.setText(item.getDescription());
-            jumlahHarga.setText(String.valueOf(item.getAmount()));
+            descriptionInput.setText(item.getNama());
+            jumlahHarga.setText(String.valueOf(item.getJmlHarga()));
+            jumlah.setText(String.valueOf(item.getJumlah()));
 
             if (item.getType() == Transaction.Type.STRONG){
                 typeRadioGroup.check(R.id.radio_strong);
@@ -65,13 +66,13 @@ public class SaveActivity extends AppCompatActivity {
             harga = 12000;
         }
 
-        if (jumlahPesanan < 20){
+        if (jumlahPesanan < 10){
             jumlahPesanan++;
             int jmlHarga = jumlahPesanan * harga;
             jumlahHarga.setText(String.valueOf(jmlHarga));
             jumlah.setText(String.valueOf(jumlahPesanan));
         } else {
-            Toast.makeText(this, "Batas Pemesanan Hanya 20 Cup", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Batas Pemesanan Hanya 10 Cup", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -96,10 +97,12 @@ public class SaveActivity extends AppCompatActivity {
     public void handleOrder(View view) {
         String description = descriptionInput.getText().toString();
         int amount = Integer.parseInt(jumlahHarga.getText().toString());
+        int jmlHarga = Integer.parseInt(jumlah.getText().toString());
         Transaction.Type type = getCheckedType();
 
-        item.setDescription(description);
-        item.setAmount(amount);
+        item.setNama(description);
+        item.setJmlHarga(amount);
+        item.setJumlah(jmlHarga);
         item.setType(type);
 
         Intent intent = new Intent();

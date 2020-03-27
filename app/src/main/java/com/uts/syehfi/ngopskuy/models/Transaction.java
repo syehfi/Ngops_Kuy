@@ -10,33 +10,43 @@ public class Transaction implements Parcelable {
         CREAMY
     }
 
-    private String description;
-    private int amount;
+    private String nama;
+    private int jmlHarga;
+    private int jumlah;
     private Type type;
 
     public Transaction() {
     }
 
-    public Transaction(String description, int amount, Type type) {
-        this.description = description;
-        this.amount = amount;
+    public Transaction(String nama, int jmlHarga, int jumlah, Type type) {
+        this.nama = nama;
+        this.jmlHarga = jmlHarga;
+        this.jumlah = jumlah;
         this.type = type;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNama() {
+        return nama;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getJmlHarga() {
+        return jmlHarga;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setJmlHarga(int jmlHarga) {
+        this.jmlHarga = jmlHarga;
+    }
+
+    public int getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
     }
 
     public Type getType() {
@@ -47,6 +57,7 @@ public class Transaction implements Parcelable {
         this.type = type;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,14 +65,16 @@ public class Transaction implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.description);
-        dest.writeInt(this.amount);
+        dest.writeString(this.nama);
+        dest.writeInt(this.jmlHarga);
+        dest.writeInt(this.jumlah);
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
     }
 
     protected Transaction(Parcel in) {
-        this.description = in.readString();
-        this.amount = in.readInt();
+        this.nama = in.readString();
+        this.jmlHarga = in.readInt();
+        this.jumlah = in.readInt();
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : Type.values()[tmpType];
     }

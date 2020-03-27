@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.uts.syehfi.ngopskuy.models.Session;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
+    private Session session;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,19 +22,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         usernameInput = findViewById(R.id.input_username);
         passwordInput = findViewById(R.id.input_password);
+        session = Application.getSession();
     }
 
     public void handleLogin(View view) {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
 
-        boolean success = username.equals("a") && password.equals("a");
+        boolean success = session.validate(username, password);
         if (success) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         } else {
-            Snackbar.make(view, "Authentication Failed", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, "Authentication Failed", Snackbar.LENGTH_SHORT).show();
         }
     }
 }

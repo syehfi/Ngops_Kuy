@@ -53,10 +53,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TextView amountText;
 
         public void bind(final int index, final Transaction item) {
-            descriptionText.setText(item.getDescription());
+            descriptionText.setText(item.getNama());
             Locale localeID = new Locale("in", "ID");
             NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-            amountText.setText(formatRupiah.format(item.getAmount()));
+            amountText.setText(formatRupiah.format(item.getJmlHarga()));
 
 //            FAB
             itemView.setOnClickListener(new View.OnClickListener() {
