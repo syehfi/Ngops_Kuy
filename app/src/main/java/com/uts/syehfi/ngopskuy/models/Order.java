@@ -31,15 +31,16 @@ public class Order {
         this.transactions.remove(transaction);
     }
 
+    public void removeTransactionAll(){
+        this.transactions.clear();
+        this.balance = 0;
+    }
+
     public void updateTransaction(int index, Transaction transaction) {
         this.transactions.set(index, transaction);
         this.balance = 0;
         for (Transaction t : this.transactions) {
-            if (t.getType() == Transaction.Type.STRONG) {
-                balance += t.getJmlHarga();
-            } else {
-                balance += t.getJmlHarga();
-            }
+            balance += t.getJmlHarga();
         }
     }
 }

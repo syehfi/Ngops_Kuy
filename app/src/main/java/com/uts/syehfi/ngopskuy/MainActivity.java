@@ -13,8 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.uts.syehfi.ngopskuy.adapters.TransactionAdapter;
 import com.uts.syehfi.ngopskuy.models.Order;
 import com.uts.syehfi.ngopskuy.models.Session;
@@ -126,6 +128,17 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             }
             adapter.notifyDataSetChanged();
             balanceText.setText(formatRupiah.format(order.getBalance()));
+        }
+    }
+
+    public void handleBayar(View view) {
+        if (order.getBalance() == 0){
+            Snackbar.make(view, "Pesanan Kosong", Snackbar.LENGTH_SHORT).show();
+        } else {
+            order.removeTransactionAll();
+            adapter.notifyDataSetChanged();
+            balanceText.setText(formatRupiah.format(order.getBalance()));
+            Snackbar.make(view, "Pesanan Anda Sedang Dibuat", Snackbar.LENGTH_LONG).show();
         }
     }
 }

@@ -15,7 +15,7 @@ import com.uts.syehfi.ngopskuy.models.Transaction;
 
 public class SaveActivity extends AppCompatActivity {
 
-    private EditText descriptionInput;
+    private EditText namaInput;
     private RadioGroup typeRadioGroup;
     private Transaction item;
     private int index;
@@ -28,7 +28,7 @@ public class SaveActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
-        descriptionInput = findViewById(R.id.input_name);
+        namaInput = findViewById(R.id.input_name);
         typeRadioGroup = findViewById(R.id.group_type);
         jumlah = findViewById(R.id.amount_text);
         jumlahHarga = findViewById(R.id.jumlah_harga);
@@ -37,7 +37,7 @@ public class SaveActivity extends AppCompatActivity {
         if (extras != null){
             item = extras.getParcelable(MainActivity.TRANSACTION_KEY);
             index = extras.getInt(MainActivity.INDEX_KEY, 0);
-            descriptionInput.setText(item.getNama());
+            namaInput.setText(item.getNama());
             jumlahHarga.setText(String.valueOf(item.getJmlHarga()));
             jumlah.setText(String.valueOf(item.getJumlah()));
 
@@ -95,20 +95,28 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     public void handleOrder(View view) {
-        String description = descriptionInput.getText().toString();
-        int amount = Integer.parseInt(jumlahHarga.getText().toString());
+        String nama = namaInput.getText().toString();
+        int total = Integer.parseInt(jumlahHarga.getText().toString());
         int jmlHarga = Integer.parseInt(jumlah.getText().toString());
         Transaction.Type type = getCheckedType();
 
-        item.setNama(description);
-        item.setJmlHarga(amount);
+        item.setNama(nama);
+        item.setJmlHarga(total);
         item.setJumlah(jmlHarga);
         item.setType(type);
 
-        Intent intent = new Intent();
-        intent.putExtra(MainActivity.TRANSACTION_KEY, item);
-        intent.putExtra(MainActivity.INDEX_KEY, index);
-        setResult(RESULT_OK, intent);
-        finish();
+        if (nama.isEmpty()){
+            namaInput.setError("Isi terlebih dahulu");
+        } else if (getCheckedType() == Transaction.Type.EMPTY){
+            Toast.makeText(getApplicationContext(), "Pilih salah satu menu terlebih dahulu",Toast.LENGTH_LONG).show();
+        } else if (jmlHarga == 0){
+            Toast.makeText(getApplicationContext(), "Pesanan minimal 1 Cup",Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra(MainActivity.TRANSACTION_KEY, item);
+            intent.putExtra(MainActivity.INDEX_KEY, index);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }
