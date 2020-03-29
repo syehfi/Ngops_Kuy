@@ -83,8 +83,7 @@ public class SaveActivity extends AppCompatActivity {
         } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_creamy){
             harga = 12000;
         }
-
-        if (jumlahPesanan > 1){
+        if (jumlahPesanan > 1 ){
             jumlahPesanan--;
             int jmlHarga = jumlahPesanan * harga;
             jumlahHarga.setText(String.valueOf(jmlHarga));

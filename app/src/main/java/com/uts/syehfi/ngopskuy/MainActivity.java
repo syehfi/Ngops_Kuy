@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
             order.removeTransactionAll();
             adapter.notifyDataSetChanged();
             balanceText.setText(formatRupiah.format(order.getBalance()));
-            Snackbar.make(view, "Pesanan Anda Sedang Dibuat", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(view, "Pembayaran Telah Selesai", Snackbar.LENGTH_LONG).show();
         }
     }
 }
