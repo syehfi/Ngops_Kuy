@@ -1,7 +1,11 @@
 # Ngops_Kuy
 
 # Fix
-Splash Screen
+1. Splash Screen
+2. Login
+3. Save, Update
+4. Delete On Swipe
 
 # On Progress
-1. Login
+1. Fixing Style
+2. Order Function
