@@ -6,6 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="391dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_btn">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nama"
         android:layout_width="360dp"
@@ -43,19 +63,33 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <RadioButton
-            android:id="@+id/radio_strong"
+            android:id="@+id/radio_menu1"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Kopi Senja Strong" />
 
         <RadioButton
-            android:id="@+id/radio_creamy"
+            android:id="@+id/radio_menu2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Kopi Senja Secukupnya"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="145dp" />
+
+        <RadioButton
+            android:id="@+id/radio_menu3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Kopi Senja Gula Aren" />
+
+        <RadioButton
+            android:id="@+id/radio_menu4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Kopi Hitam Senja" />
     </RadioGroup>
 
     <Button
@@ -196,4 +230,5 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

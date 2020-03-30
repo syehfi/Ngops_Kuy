@@ -4,25 +4,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Transaction implements Parcelable {
-    public enum Type {
+
+    public enum Menu {
         EMPTY,
-        STRONG,
-        CREAMY
+        MENU1,
+        MENU2,
+        MENU3,
+        MENU4
     }
 
     private String nama;
     private int jmlHarga;
     private int jumlah;
-    private Type type;
+    private Menu menu;
 
-    public Transaction() {
+    public Transaction(){
+
     }
 
-    public Transaction(String nama, int jmlHarga, int jumlah, Type type) {
+    public Transaction(String nama, int jmlHarga, int jumlah, Menu menu) {
         this.nama = nama;
         this.jmlHarga = jmlHarga;
         this.jumlah = jumlah;
-        this.type = type;
+        this.menu = menu;
     }
 
     public String getNama() {
@@ -49,14 +53,33 @@ public class Transaction implements Parcelable {
         this.jumlah = jumlah;
     }
 
-    public Type getType() {
-        return type;
+    public Menu getMenu() {
+        return menu;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
+    protected Transaction(Parcel in) {
+        nama = in.readString();
+        jmlHarga = in.readInt();
+        jumlah = in.readInt();
+        int tmpType = in.readInt();
+        this.menu = tmpType == -1 ? null : Menu.values()[tmpType];
+    }
+
+    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel in) {
+            return new Transaction(in);
+        }
+
+        @Override
+        public Transaction[] newArray(int size) {
+            return new Transaction[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -65,29 +88,9 @@ public class Transaction implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.nama);
-        dest.writeInt(this.jmlHarga);
-        dest.writeInt(this.jumlah);
-        dest.writeInt(this.type == null ? -1 : this.type.ordinal());
+        dest.writeString(nama);
+        dest.writeInt(jmlHarga);
+        dest.writeInt(jumlah);
+        dest.writeInt(this.menu == null ? -1 : this.menu.ordinal());
     }
-
-    protected Transaction(Parcel in) {
-        this.nama = in.readString();
-        this.jmlHarga = in.readInt();
-        this.jumlah = in.readInt();
-        int tmpType = in.readInt();
-        this.type = tmpType == -1 ? null : Type.values()[tmpType];
-    }
-
-    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
-        @Override
-        public Transaction createFromParcel(Parcel source) {
-            return new Transaction(source);
-        }
-
-        @Override
-        public Transaction[] newArray(int size) {
-            return new Transaction[size];
-        }
-    };
 }

@@ -38,32 +38,44 @@ public class SaveActivity extends AppCompatActivity {
             item = extras.getParcelable(MainActivity.TRANSACTION_KEY);
             index = extras.getInt(MainActivity.INDEX_KEY, 0);
             namaInput.setText(item.getNama());
-            jumlahHarga.setText(String.valueOf(item.getJmlHarga()));
             jumlah.setText(String.valueOf(item.getJumlah()));
+            jumlahHarga.setText(String.valueOf(item.getJmlHarga()));
 
-            if (item.getType() == Transaction.Type.STRONG){
-                typeRadioGroup.check(R.id.radio_strong);
-            } else if (item.getType() == Transaction.Type.CREAMY){
-                typeRadioGroup.check(R.id.radio_creamy);
+            if (item.getMenu() == Transaction.Menu.MENU1){
+                typeRadioGroup.check(R.id.radio_menu1);
+            } else if (item.getMenu() == Transaction.Menu.MENU2){
+                typeRadioGroup.check(R.id.radio_menu2);
+            } else if (item.getMenu() == Transaction.Menu.MENU3){
+                typeRadioGroup.check(R.id.radio_menu3);
+            } else if (item.getMenu() == Transaction.Menu.MENU4){
+                typeRadioGroup.check(R.id.radio_menu4);
             }
         }
     }
 
-    private Transaction.Type getCheckedType() {
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_strong) {
-            return Transaction.Type.STRONG;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_creamy) {
-            return Transaction.Type.CREAMY;
+    private Transaction.Menu getCheckedType() {
+        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1) {
+            return Transaction.Menu.MENU1;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2) {
+            return Transaction.Menu.MENU2;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
+            return Transaction.Menu.MENU3;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
+            return Transaction.Menu.MENU4;
         }
-        return Transaction.Type.EMPTY;
+        return Transaction.Menu.EMPTY;
     }
 
     public void addAmount(View view) {
 
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_strong){
+        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1){
             harga = 10000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_creamy){
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2){
             harga = 12000;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
+            harga = 15000;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
+            harga = 8000;
         }
 
         if (jumlahPesanan < 10){
@@ -78,11 +90,16 @@ public class SaveActivity extends AppCompatActivity {
 
     public void minAmount(View view) {
 
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_strong){
+        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1){
             harga = 10000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_creamy){
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2){
             harga = 12000;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
+            harga = 15000;
+        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
+            harga = 8000;
         }
+
         if (jumlahPesanan > 1 ){
             jumlahPesanan--;
             int jmlHarga = jumlahPesanan * harga;
@@ -97,16 +114,16 @@ public class SaveActivity extends AppCompatActivity {
         String nama = namaInput.getText().toString();
         int total = Integer.parseInt(jumlahHarga.getText().toString());
         int jmlHarga = Integer.parseInt(jumlah.getText().toString());
-        Transaction.Type type = getCheckedType();
+        Transaction.Menu menu = getCheckedType();
 
         item.setNama(nama);
         item.setJmlHarga(total);
         item.setJumlah(jmlHarga);
-        item.setType(type);
+        item.setMenu(menu);
 
         if (nama.isEmpty()){
             namaInput.setError("Isi terlebih dahulu");
-        } else if (getCheckedType() == Transaction.Type.EMPTY){
+        } else if (getCheckedType() == Transaction.Menu.EMPTY){
             Toast.makeText(getApplicationContext(), "Pilih salah satu menu terlebih dahulu",Toast.LENGTH_LONG).show();
         } else if (jmlHarga == 0){
             Toast.makeText(getApplicationContext(), "Pesanan minimal 1 Cup",Toast.LENGTH_LONG).show();
