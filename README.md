@@ -8,4 +8,3 @@
 
 # On Progress
 1. Fixing Style
-2. Order Function
