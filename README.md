@@ -7,4 +7,3 @@
 4. Delete On Swipe
 
 # On Progress
-1. Fixing Style
