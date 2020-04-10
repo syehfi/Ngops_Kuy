@@ -3,8 +3,8 @@ package com.uts.syehfi.ngopskuy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +16,7 @@ import com.uts.syehfi.ngopskuy.models.Transaction;
 public class SaveActivity extends AppCompatActivity {
 
     private EditText namaInput;
-    private RadioGroup typeRadioGroup;
+    private CheckBox menu1, menu2, menu3, menu4;
     private Transaction item;
     private int index;
     private TextView jumlah;
@@ -29,7 +29,10 @@ public class SaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_save);
         namaInput = findViewById(R.id.input_name);
-        typeRadioGroup = findViewById(R.id.group_type);
+        menu1 = findViewById(R.id.chechbox_menu1);
+        menu2 = findViewById(R.id.checkbox_menu2);
+        menu3 = findViewById(R.id.checkbox_menu3);
+        menu4 = findViewById(R.id.checkbox_menu4);
         jumlah = findViewById(R.id.amount_text);
         jumlahHarga = findViewById(R.id.jumlah_harga);
 
@@ -41,72 +44,117 @@ public class SaveActivity extends AppCompatActivity {
             jumlah.setText(String.valueOf(item.getJumlah()));
             jumlahHarga.setText(String.valueOf(item.getJmlHarga()));
 
-            if (item.getMenu() == Transaction.Menu.MENU1){
-                typeRadioGroup.check(R.id.radio_menu1);
+
+            if (item.getMenu() == Transaction.Menu.MENU1_DUO1){
+                menu1.setChecked(true);
+                menu2.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU1_DUO2){
+                menu1.setChecked(true);
+                menu3.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU1_DUO3){
+                menu1.setChecked(true);
+                menu4.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU2_DUO1){
+                menu2.setChecked(true);
+                menu3.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU2_DUO2){
+                menu2.setChecked(true);
+                menu4.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU3_DUO1){
+                menu3.setChecked(true);
+                menu4.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU_ALL){
+                menu1.setChecked(true);
+                menu2.setChecked(true);
+                menu3.setChecked(true);
+                menu4.setChecked(true);
+            } else if (item.getMenu() == Transaction.Menu.MENU1){
+                menu1.setChecked(true);
             } else if (item.getMenu() == Transaction.Menu.MENU2){
-                typeRadioGroup.check(R.id.radio_menu2);
+                menu2.setChecked(true);
             } else if (item.getMenu() == Transaction.Menu.MENU3){
-                typeRadioGroup.check(R.id.radio_menu3);
+                menu3.setChecked(true);
             } else if (item.getMenu() == Transaction.Menu.MENU4){
-                typeRadioGroup.check(R.id.radio_menu4);
+                menu4.setChecked(true);
             }
         }
     }
 
     private Transaction.Menu getCheckedType() {
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1) {
+
+        if (menu1.isChecked() && menu2.isChecked() && menu3.isChecked() && menu4.isChecked()){
+            return Transaction.Menu.MENU_ALL;
+        } else if (menu1.isChecked() && menu2.isChecked()){
+            return Transaction.Menu.MENU1_DUO1;
+        } else if (menu1.isChecked() && menu3.isChecked()){
+            return Transaction.Menu.MENU1_DUO2;
+        } else if (menu1.isChecked() && menu4.isChecked()){
+            return Transaction.Menu.MENU1_DUO3;
+        } else if (menu2.isChecked() && menu3.isChecked()){
+            return Transaction.Menu.MENU2_DUO1;
+        } else if (menu2.isChecked() && menu4.isChecked()){
+            return Transaction.Menu.MENU2_DUO2;
+        } else if (menu3.isChecked() && menu4.isChecked()) {
+            return Transaction.Menu.MENU3_DUO1;
+        } else if (menu1.isChecked()) {
             return Transaction.Menu.MENU1;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2) {
+        } else if (menu2.isChecked()) {
             return Transaction.Menu.MENU2;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
+        } else if (menu3.isChecked()){
             return Transaction.Menu.MENU3;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
+        } else if (menu4.isChecked()){
             return Transaction.Menu.MENU4;
         }
         return Transaction.Menu.EMPTY;
     }
 
-    public void addAmount(View view) {
+    public void itemPrice(){
 
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1){
+        if (menu1.isChecked() && menu2.isChecked() && menu3.isChecked() && menu4.isChecked()){
+            harga = 10000 + 12000 + 15000 + 8000;
+        } else if (menu1.isChecked() && menu2.isChecked()){
+            harga = 10000 + 12000;
+        } else if (menu1.isChecked() && menu3.isChecked()){
+            harga = 10000 + 15000;
+        } else if (menu1.isChecked() && menu4.isChecked()){
+            harga = 10000 + 8000;
+        }else if (menu2.isChecked() && menu3.isChecked()){
+            harga = 12000 + 15000;
+        } else if (menu2.isChecked() && menu4.isChecked()){
+            harga = 12000 + 8000;
+        } else if (menu3.isChecked() && menu4.isChecked()) {
+            harga = 15000 + 8000;
+        } else if (menu1.isChecked()){
             harga = 10000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2){
+        } else if (menu2.isChecked()){
             harga = 12000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
+        } else if (menu3.isChecked()){
             harga = 15000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
+        } else if (menu4.isChecked()){
             harga = 8000;
         }
+    }
 
+    public void addAmount(View view) {
         if (jumlahPesanan < 10){
+            itemPrice();
             jumlahPesanan++;
             int jmlHarga = jumlahPesanan * harga;
             jumlahHarga.setText(String.valueOf(jmlHarga));
             jumlah.setText(String.valueOf(jumlahPesanan));
-        } else {
-            Toast.makeText(this, "Batas Pemesanan Hanya 10 Cup", Toast.LENGTH_LONG).show();
         }
     }
 
     public void minAmount(View view) {
-
-        if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu1){
-            harga = 10000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu2){
-            harga = 12000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu3){
-            harga = 15000;
-        } else if (typeRadioGroup.getCheckedRadioButtonId() == R.id.radio_menu4){
-            harga = 8000;
-        }
-
-        if (jumlahPesanan > 1 ){
+        if (jumlahPesanan >= 1 ){
+            itemPrice();
             jumlahPesanan--;
             int jmlHarga = jumlahPesanan * harga;
             jumlahHarga.setText(String.valueOf(jmlHarga));
             jumlah.setText(String.valueOf(jumlahPesanan));
         } else {
-            Toast.makeText(this, "Minimal Pemesanan 1 Cup", Toast.LENGTH_LONG).show();
+            jumlahHarga.setText("0");
+            jumlah.setText("0");
         }
     }
 

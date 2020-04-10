@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements TransactionAdapte
                 order.removeTransaction(index);
                 adapter.notifyDataSetChanged();
                 balanceText.setText(formatRupiah.format(order.getBalance()));
+                Snackbar.make(getWindow().getDecorView().getRootView(), "Item Telah Di Hapus", Snackbar.LENGTH_LONG).show();
             }
         };
 

@@ -6,26 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="391dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_btn">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nama"
         android:layout_width="360dp"
@@ -46,51 +26,6 @@
             android:layout_height="wrap_content"
             android:hint="Nama Pemesan" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <RadioGroup
-        android:id="@+id/group_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginRight="110dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-        <RadioButton
-            android:id="@+id/radio_menu1"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:text="Kopi Senja Strong" />
-
-        <RadioButton
-            android:id="@+id/radio_menu2"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Kopi Senja Secukupnya"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="145dp" />
-
-        <RadioButton
-            android:id="@+id/radio_menu3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Kopi Senja Gula Aren" />
-
-        <RadioButton
-            android:id="@+id/radio_menu4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Kopi Hitam Senja" />
-    </RadioGroup>
 
     <Button
         android:id="@+id/button2"
@@ -151,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:text="Jumlah Pesanan"
@@ -160,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/group_type" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
         android:id="@+id/textView4"
@@ -230,5 +165,43 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginRight="115dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <CheckBox
+            android:id="@+id/chechbox_menu1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kopi Senja Strong" />
+
+        <CheckBox
+            android:id="@+id/checkbox_menu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kopi Senja Creamy" />
+
+        <CheckBox
+            android:id="@+id/checkbox_menu3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kopi Senja Gula Aren" />
+
+        <CheckBox
+            android:id="@+id/checkbox_menu4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kopi Hitam Senja" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

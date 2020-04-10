@@ -10,7 +10,18 @@ public class Transaction implements Parcelable {
         MENU1,
         MENU2,
         MENU3,
-        MENU4
+        MENU4,
+//        Menu 1 Duo
+        MENU1_DUO1,
+        MENU1_DUO2,
+        MENU1_DUO3,
+//        Menu 2 Duo
+        MENU2_DUO1,
+        MENU2_DUO2,
+//        Menu 3 Duo
+        MENU3_DUO1,
+//        Menu All
+        MENU_ALL
     }
 
     private String nama;
